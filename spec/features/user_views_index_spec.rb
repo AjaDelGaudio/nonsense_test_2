@@ -2,34 +2,35 @@ require 'spec_helper'
 require 'rails_helper'
 require 'capybara'
 
-feature "User views the index page", %(
+feature "User answers survey questions", %(
   As a user
-  I want to navigate from the index page to the survey
-  So that I can answer the first survey question.
+  I want to take a survey
+  So that I can know my tolerence level for nonsense.
 ) do
 =begin
     Acceptance Criteria:
-    [ ] When I visit the root path, I can see a welcome
-        message.
-    [ ] When I visit the root path, I have the choice
-        to take the survey.
-    [ ] If I choose to take the survey, I am sent to a
-        "survey" page to view the survey questions.
+    [ ] I can view the current question.
+    [ ] If there are multiple choice answers associated with the question,
+        I can view the choices and submit my answer choice.
+    [ ] If it is an openended question, I can submit my answer via a text field.
+    [ ] After I submit my answer, I am taken to the next question.
 =end
+  scenario "user views the current question and it's number" do
+    question = FactoryGirl.create(:question)
 
-  scenario "user views the welcome page" do
-    visit '/'
+    visit questions_path
 
-    expect(page).to have_content "Welcome!"
+    expect(page).to have_content(question.number)
+    expect(page).to have_content(question.text)
   end
 
-  scenario "user navigates to the survey" do
-    visit '/'
-    find_link('Take the survey!')
-    click_link('Take the survey!')
-    visit '/survey/question-1'
+  scenario "only one question on the page" do
+    question_1 = FactoryGirl.create(:question)
+    question_2 = FactoryGirl.create(:question)
 
-    current_path.should == "/survey/question-1"
-    expect(page).to have_content("Question 1")
+    visit questions_path
+
+    expect(page).to have_content(question_1.text)
+    expect(page).not_to have_content(question_2.text)
   end
 end
