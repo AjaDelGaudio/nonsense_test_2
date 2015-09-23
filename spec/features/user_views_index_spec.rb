@@ -34,4 +34,18 @@ feature "User answers survey questions - ", %(
     expect(page).not_to have_content(question_2.text)
   end
 
+  scenario "user submits the answer to a multiple choice question" do
+    question = FactoryGirl.create(:question)
+    choices = FactoryGirl.create(:choices)
+
+    choice_a = choices.hash[a]
+    choice_b = choices.hash[b]
+
+    visit question_path(question)
+
+    expect(page).to have_content(choice_a)
+    expect(page).to have_content(choice_b)
+
+  end
+
 end
