@@ -38,6 +38,7 @@ group :development, :test do
   gem 'pry'
   gem 'launchy'
   gem 'factory_girl'
+  gem 'shoulda-matchers'
 end
 
 group :development do

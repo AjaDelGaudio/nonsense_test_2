@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   def show
-    @question = Question.all
+    @questions = Question.all
+    @question = @questions.find_by(number: 1)
   end
 end
