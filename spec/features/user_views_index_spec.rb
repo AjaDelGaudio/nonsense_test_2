@@ -38,8 +38,8 @@ feature "User answers survey questions - ", %(
     question = FactoryGirl.create(:question)
     choices = FactoryGirl.create(:choices)
 
-    choice_a = choices.hash[a]
-    choice_b = choices.hash[b]
+    choice_a = choices.hash.data["a"]
+    choice_b = choices.hash.data["b"]
 
     visit question_path(question)
 

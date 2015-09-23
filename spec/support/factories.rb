@@ -7,6 +7,6 @@ FactoryGirl.define do
 
 
   factory :choices do
-    hash "{ a: Antidisestablismentarism, b: Boolean, c: cat }"
+    hash { { a: "Antidisestablismentarism", b: "Batman", c: "Cactus on toast" } }
   end
 end
