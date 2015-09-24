@@ -4,8 +4,7 @@ class QuestionsController < ApplicationController
     @questions = Question.all
     @question = @questions.first
     @choices = Choice.all
-    binding.pry
-    @choices = @question.choice
+    @choice = @question.choice
 
   end
 end

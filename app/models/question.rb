@@ -6,6 +6,5 @@ class Question < ActiveRecord::Base
 
   validates :text, presence: true
 
-  validates :multiple_choice, presence: true
   validates_inclusion_of :multiple_choice, in: [true, false]
 end
